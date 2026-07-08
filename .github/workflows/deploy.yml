@@ -1,0 +1,34 @@
+name: Deploy Server (CI/CD)
+
+on:
+  push:
+    branches:
+      - main # Triggers the workflow when you push to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Optional: Add steps here to run tests or build production assets if needed
+
+      - name: Executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22 # Your SSH port
+          script: |
+            cd /home/irfan_khan/lucid
+            git pull origin main
+            
+            # If you are using Docker:
+            docker compose up -d --build
+            
+            # Or if you are running bare-metal Node/Nginx:
+            # npm install --production
+            # pm2 restart app-name
