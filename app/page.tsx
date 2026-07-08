@@ -135,7 +135,7 @@ export default function Home() {
             {/* Left Block */}
             <div ref={leftRef} className="text-white flex flex-col gap-2 relative z-10 max-w-xl">
               <h1 className="text-5xl font-bold">
-                I am Irfan Khan
+                I am Irfan shah
               </h1>
               <p className="text-xl text-gray-100 font-medium">Full Stack web dev</p>
               <div className="py-6">
